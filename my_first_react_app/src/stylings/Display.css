@@ -1,0 +1,9 @@
+.display input{
+  margin-bottom: 2px;
+  background-color: Black;
+  color: white;
+  width: 96px;
+  height: 25px;
+  border-radius: 2px;
+  border-color: black;
+}

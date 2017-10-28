@@ -1,0 +1,9 @@
+.button input{
+  color: white;
+  background-color: black;
+  width: 100px;
+  height: 20px;
+  padding: auto;
+  border: 2px;
+  border-radius: 20%;
+}
