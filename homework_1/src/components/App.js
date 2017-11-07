@@ -6,28 +6,37 @@ class App extends Component {
 
   constructor(){
     super();
+    this.runStart = 0;
     this.state = {
       fixedValue: "",
-      appendValue: ""
+      appendValue: "",
+      result: ""
     }
   }
 
-
   fixedValueGet = (event) => {
-    this.setState({fixedValue: event.target.value});
+    if(this.runStart === 0){
+      this.setState({fixedValue: event.target.value});
+      this.setState({result: event.target.value});
+    }
   }
 
   appendValueGet = (event) => {
-    this.setState({appendValue: event.target.value});
+    if(this.runStart === 0){
+      this.setState({appendValue: event.target.value});
+    }
   }
 
   start = () => {
-    setInterval(()=>{
-      let {fixedValue} = this.state;
-      let {appendValue} = this.state;
-      fixedValue += appendValue;
-      console.log(this.setState.fixedValue);
-    },1000);
+    if(this.runStart === 0){
+      this.runStart = 1;
+      setInterval(()=>{
+        let {result} = this.state;
+        let {appendValue} = this.state;
+        this.setState({result: result += appendValue});
+        console.log(this.state.result);
+      },1000);
+    }
   }
 
   render() {
