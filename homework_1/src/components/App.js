@@ -6,7 +6,6 @@ class App extends Component {
 
   constructor(){
     super();
-    this.runStart = 0;
     this.state = {
       fixedValue: "",
       appendValue: "",
@@ -14,40 +13,26 @@ class App extends Component {
     }
   }
 
-  fixedValueGet = (event) => {
-    if(this.runStart === 0){
-      this.setState({fixedValue: event.target.value});
-      this.setState({result: event.target.value});
-    }
-  }
-
-  appendValueGet = (event) => {
-    if(this.runStart === 0){
-      this.setState({appendValue: event.target.value});
-    }
+  handleChange = (event) => {
+    this.setState({[event.target.name]: event.target.value});
   }
 
   start = () => {
-    if(this.runStart === 0){
-      this.runStart = 1;
-      setInterval(()=>{
-        let {result} = this.state;
-        let {appendValue} = this.state;
-        this.setState({result: result += appendValue});
-        console.log(this.state.result);
-      },1000);
-    }
+    let {result, fixedValue, appendValue} = this.state;
+    result = fixedValue;
+    setInterval(()=>{
+      this.setState({result: result += appendValue});
+    },1000);
   }
 
   render() {
     return (
       <div className="App">
-        <input type="text" value = {this.state.fixedValue} onChange = {this.fixedValueGet}/>
-        <input type="text" value = {this.state.appendValue} onChange = {this.appendValueGet}/>
+        <input name="fixedValue" type="text" onChange = {this.handleChange}/>
+        <input name="appendValue" type="text" onChange = {this.handleChange}/>
         <input type="submit" value="Start" onClick = {this.start} />
+        <p>{this.state.result}</p>
       </div>
     );
   }
-
-
 }
